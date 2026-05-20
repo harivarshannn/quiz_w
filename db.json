@@ -1,0 +1,413 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "category": "Tech & Coding",
+      "difficulty": "Easy",
+      "question": "Which programming language is known as the language of the web?",
+      "options": [
+        "Python",
+        "C++",
+        "JavaScript",
+        "Java"
+      ],
+      "correctAnswer": "JavaScript"
+    },
+    {
+      "id": 2,
+      "category": "Tech & Coding",
+      "difficulty": "Easy",
+      "question": "What does HTML stand for?",
+      "options": [
+        "Hyper Text Markup Language",
+        "High Text Machine Language",
+        "Hyper Tabular Markup Language",
+        "Hyperlinks and Text Markup Language"
+      ],
+      "correctAnswer": "Hyper Text Markup Language"
+    },
+    {
+      "id": 3,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "question": "Which of the following is NOT a feature introduced in ECMAScript 6 (ES6)?",
+      "options": [
+        "Arrow Functions",
+        "Prototypal Inheritance",
+        "Classes",
+        "Template Literals"
+      ],
+      "correctAnswer": "Prototypal Inheritance"
+    },
+    {
+      "id": 4,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "question": "In JavaScript, what is the purpose of the 'Array.prototype.map()' method?",
+      "options": [
+        "To filter out specific elements from an array",
+        "To create a new array with the results of calling a function on every element",
+        "To sort the elements of an array in place",
+        "To check if at least one element passes a test"
+      ],
+      "correctAnswer": "To create a new array with the results of calling a function on every element"
+    },
+    {
+      "id": 5,
+      "category": "Tech & Coding",
+      "difficulty": "Hard",
+      "question": "What is the time complexity of searching in a perfectly balanced Binary Search Tree (BST)?",
+      "options": [
+        "O(1)",
+        "O(n)",
+        "O(n log n)",
+        "O(log n)"
+      ],
+      "correctAnswer": "O(log n)"
+    },
+    {
+      "id": 6,
+      "category": "Tech & Coding",
+      "difficulty": "Hard",
+      "question": "Which of the JavaScript statements creates a deep copy of a nested object?",
+      "options": [
+        "Object.assign({}, original)",
+        "JSON.parse(JSON.stringify(original))",
+        "{ ...original }",
+        "original.clone()"
+      ],
+      "correctAnswer": "JSON.parse(JSON.stringify(original))"
+    },
+    {
+      "id": 7,
+      "category": "Tech & Coding",
+      "difficulty": "Easy",
+      "question": "Which CSS property is used to change the background color of an element?",
+      "options": [
+        "color",
+        "bg-color",
+        "background-color",
+        "fill"
+      ],
+      "correctAnswer": "background-color"
+    },
+    {
+      "id": 8,
+      "category": "Tech & Coding",
+      "difficulty": "Easy",
+      "question": "What is the correct way to write a JavaScript array?",
+      "options": [
+        "var colors = (1:'red', 2:'blue')",
+        "var colors = ['red', 'blue']",
+        "var colors = 'red', 'blue'",
+        "var colors = 1 = ('red'), 2 = ('blue')"
+      ],
+      "correctAnswer": "var colors = ['red', 'blue']"
+    },
+    {
+      "id": 9,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "question": "Which keyword is used to define a constant variable in ES6?",
+      "options": [
+        "var",
+        "let",
+        "const",
+        "constant"
+      ],
+      "correctAnswer": "const"
+    },
+    {
+      "id": 10,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "question": "What is the default value of the 'position' property in CSS?",
+      "options": [
+        "relative",
+        "absolute",
+        "fixed",
+        "static"
+      ],
+      "correctAnswer": "static"
+    },
+    {
+      "id": 11,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "question": "Which operator is used to compare both value and type in JavaScript?",
+      "options": [
+        "==",
+        "===",
+        "=",
+        "!="
+      ],
+      "correctAnswer": "==="
+    },
+    {
+      "id": 12,
+      "category": "Tech & Coding",
+      "difficulty": "Hard",
+      "question": "What does 'Hoisting' refer to in JavaScript?",
+      "options": [
+        "Moving variables to the bottom of the script",
+        "Variables and function declarations are moved to the top of their scope",
+        "Executing the script line by line",
+        "Automatic garbage collection"
+      ],
+      "correctAnswer": "Variables and function declarations are moved to the top of their scope"
+    },
+    {
+      "id": 13,
+      "category": "Tech & Coding",
+      "difficulty": "Hard",
+      "question": "What is a 'closure' in JavaScript?",
+      "options": [
+        "A way to close a browser window",
+        "A function that has access to its outer function scope even after the outer function has returned",
+        "A method to encrypt data",
+        "A loop that never ends"
+      ],
+      "correctAnswer": "A function that has access to its outer function scope even after the outer function has returned"
+    },
+    {
+      "id": 14,
+      "category": "Tech & Coding",
+      "difficulty": "Easy",
+      "question": "What is the purpose of the alt attribute for images in HTML?",
+      "options": [
+        "To make the image look better",
+        "To provide alternative text if the image cannot be displayed",
+        "To set the image size",
+        "To create a link for the image"
+      ],
+      "correctAnswer": "To provide alternative text if the image cannot be displayed"
+    },
+    {
+      "id": 15,
+      "category": "Tech & Coding",
+      "difficulty": "Easy",
+      "question": "How do you call a function named 'myFunction' in JavaScript?",
+      "options": [
+        "call myFunction()",
+        "myFunction()",
+        "execute myFunction",
+        "run.myFunction"
+      ],
+      "correctAnswer": "myFunction()"
+    },
+    {
+      "id": 16,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "question": "Which CSS property is used to control the text size?",
+      "options": [
+        "text-style",
+        "font-style",
+        "text-size",
+        "font-size"
+      ],
+      "correctAnswer": "font-size"
+    },
+    {
+      "id": 17,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "question": "What is the result of '2' + 2 in JavaScript?",
+      "options": [
+        "4",
+        "22",
+        "undefined",
+        "Error"
+      ],
+      "correctAnswer": "22"
+    },
+    {
+      "id": 18,
+      "category": "Tech & Coding",
+      "difficulty": "Hard",
+      "question": "Which data structure uses LIFO (Last In First Out)?",
+      "options": [
+        "Queue",
+        "Linked List",
+        "Stack",
+        "Binary Tree"
+      ],
+      "correctAnswer": "Stack"
+    },
+    {
+      "id": 19,
+      "category": "Tech & Coding",
+      "difficulty": "Hard",
+      "question": "What is the main advantage of using 'async/await' over Promises in JavaScript?",
+      "options": [
+        "It makes code execute faster",
+        "It makes asynchronous code look and behave more like synchronous code",
+        "It is only available in modern browsers",
+        "It automatically handles all errors"
+      ],
+      "correctAnswer": "It makes asynchronous code look and behave more like synchronous code"
+    },
+    {
+      "id": 20,
+      "category": "Tech & Coding",
+      "difficulty": "Easy",
+      "question": "Which HTML element is used for the largest heading?",
+      "options": [
+        "<heading>",
+        "<h6>",
+        "<h1>",
+        "<head>"
+      ],
+      "correctAnswer": "<h1>"
+    },
+    {
+      "id": 21,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "question": "What is the purpose of 'use strict' in JavaScript?",
+      "options": [
+        "To enforce stricter parsing and error handling",
+        "To make the code faster",
+        "To enable experimental features",
+        "To disable all console logs"
+      ],
+      "correctAnswer": "To enforce stricter parsing and error handling"
+    },
+    {
+      "id": 22,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "question": "What is the primary function of the 'finally' block in a try-catch statement?",
+      "options": [
+        "To handle exceptions",
+        "To provide an alternate execution path",
+        "To execute code regardless of exceptions",
+        "To skip exception handling"
+      ],
+      "correctAnswer": "To execute code regardless of exceptions"
+    },
+    {
+      "id": 23,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "question": "Which data structure follows the LIFO (Last-In-First-Out) principle?",
+      "options": [
+        "Queue",
+        "Stack",
+        "Tree",
+        "Graph"
+      ],
+      "correctAnswer": "Stack"
+    },
+    {
+      "id": 24,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "question": "What is the purpose of the 'git stash' command in Git version control?",
+      "options": [
+        "To commit changes",
+        "To push changes to a remote repository",
+        "To temporarily save changes",
+        "To discard changes"
+      ],
+      "correctAnswer": "To temporarily save changes"
+    },
+    {
+      "id": 25,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "question": "Which programming paradigm is based on the concept of objects and classes?",
+      "options": [
+        "Functional programming",
+        "Object-oriented programming",
+        "Imperative programming",
+        "Declarative programming"
+      ],
+      "correctAnswer": "Object-oriented programming"
+    },
+    {
+      "id": 26,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "question": "What is the term for the process of finding and fixing errors in software code?",
+      "options": [
+        "Debugging",
+        "Testing",
+        "Compiling",
+        "Deploying"
+      ],
+      "correctAnswer": "Debugging"
+    },
+    {
+      "id": 27,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "question": "Which algorithm is used to sort data in ascending or descending order by repeatedly dividing the data into smaller sublists?",
+      "options": [
+        "Bubble sort",
+        "Merge sort",
+        "Quick sort",
+        "Heap sort"
+      ],
+      "correctAnswer": "Merge sort"
+    }
+  ],
+  "leaderboard": [
+    {
+      "username": "Harivarshan",
+      "score": 495,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "accuracy": 100,
+      "date": "2026-05-20T09:58:45.869Z"
+    },
+    {
+      "username": "hari",
+      "score": 360,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "accuracy": 50,
+      "date": "2026-05-20T11:01:56.805Z"
+    },
+    {
+      "username": "Hari",
+      "score": 705,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "accuracy": 33,
+      "date": "2026-05-20T11:48:40.865Z"
+    },
+    {
+      "username": "Hari",
+      "score": 1110,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "accuracy": 50,
+      "date": "2026-05-20T11:49:06.254Z"
+    },
+    {
+      "username": "vardhan",
+      "score": 375,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "accuracy": 17,
+      "date": "2026-05-20T11:59:43.916Z"
+    },
+    {
+      "username": "vardhan",
+      "score": 375,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "accuracy": 17,
+      "date": "2026-05-20T12:13:52.761Z"
+    },
+    {
+      "username": "vardhan",
+      "score": 360,
+      "category": "Tech & Coding",
+      "difficulty": "Medium",
+      "accuracy": 17,
+      "date": "2026-05-20T12:14:25.993Z"
+    }
+  ]
+}

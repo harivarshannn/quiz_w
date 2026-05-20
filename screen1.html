@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>QuizSpark Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#00424e",
+                        "on-error-container": "#ffdad6",
+                        "background": "#131315",
+                        "primary-fixed-dim": "#d0bcff",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#ffafd3",
+                        "on-primary": "#3c0091",
+                        "inverse-on-surface": "#313032",
+                        "primary-fixed": "#e9ddff",
+                        "surface-bright": "#39393b",
+                        "on-secondary-fixed": "#001f26",
+                        "on-tertiary-fixed-variant": "#85145a",
+                        "on-primary-fixed-variant": "#5516be",
+                        "on-primary-fixed": "#23005c",
+                        "on-secondary-fixed-variant": "#004e5c",
+                        "error-container": "#93000a",
+                        "on-tertiary": "#620040",
+                        "surface-container-high": "#2a2a2c",
+                        "on-surface-variant": "#cbc3d7",
+                        "surface-tint": "#d0bcff",
+                        "primary-container": "#a078ff",
+                        "surface": "#131315",
+                        "secondary": "#4cd7f6",
+                        "primary": "#d0bcff",
+                        "surface-container-highest": "#353437",
+                        "tertiary-fixed": "#ffd8e7",
+                        "surface-variant": "#353437",
+                        "surface-container": "#201f21",
+                        "surface-dim": "#131315",
+                        "secondary-fixed-dim": "#4cd7f6",
+                        "outline": "#958ea0",
+                        "secondary-container": "#03b5d3",
+                        "on-tertiary-container": "#560038",
+                        "on-primary-container": "#340080",
+                        "surface-container-low": "#1c1b1d",
+                        "on-surface": "#e5e1e4",
+                        "tertiary": "#ffafd3",
+                        "surface-container-lowest": "#0e0e10",
+                        "on-secondary": "#003640",
+                        "inverse-primary": "#6d3bd7",
+                        "tertiary-container": "#e364a7",
+                        "on-error": "#690005",
+                        "inverse-surface": "#e5e1e4",
+                        "outline-variant": "#494454",
+                        "on-tertiary-fixed": "#3d0026",
+                        "on-background": "#e5e1e4",
+                        "secondary-fixed": "#acedff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "gutter": "16px",
+                        "container-padding-desktop": "40px",
+                        "stack-md": "16px",
+                        "stack-xl": "64px",
+                        "container-padding-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0C;
+            overflow-x: hidden;
+        }
+        .neo-glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glow-violet {
+            filter: drop-shadow(0 0 20px rgba(208, 188, 255, 0.3));
+        }
+        .glow-cyan {
+            filter: drop-shadow(0 0 20px rgba(76, 215, 246, 0.3));
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #d0bcff, #4cd7f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .radial-blob {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+            opacity: 0.15;
+        }
+    </style>
+</head>
+<body class="text-on-surface font-body-md">
+<!-- Atmospheric Background Blobs -->
+<div class="radial-blob bg-primary top-[-10%] left-[-5%]"></div>
+<div class="radial-blob bg-secondary bottom-[-10%] right-[-5%]"></div>
+<!-- Side Navigation Bar -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-white/5 backdrop-blur-[30px] flex flex-col py-stack-lg px-gutter z-50">
+<div class="mb-stack-xl">
+<h1 class="font-headline-lg text-headline-lg bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-extrabold">QuizSpark</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70 tracking-widest uppercase">Luminous Learning</p>
+</div>
+<nav class="flex flex-col gap-stack-sm flex-grow">
+<a class="flex items-center gap-stack-md py-stack-md px-stack-md rounded-lg text-primary font-bold border-r-4 border-primary bg-primary/10 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-body-md text-body-md">Home</span>
+</a>
+<a class="flex items-center gap-stack-md py-stack-md px-stack-md rounded-lg text-on-surface-variant font-medium hover:bg-white/10 hover:text-primary transition-all duration-300 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-body-md text-body-md">Categories</span>
+</a>
+<a class="flex items-center gap-stack-md py-stack-md px-stack-md rounded-lg text-on-surface-variant font-medium hover:bg-white/10 hover:text-primary transition-all duration-300 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+<span class="font-body-md text-body-md">Library</span>
+</a>
+<a class="flex items-center gap-stack-md py-stack-md px-stack-md rounded-lg text-on-surface-variant font-medium hover:bg-white/10 hover:text-primary transition-all duration-300 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="emoji_events">emoji_events</span>
+<span class="font-body-md text-body-md">Leaderboard</span>
+</a>
+</nav>
+<div class="mt-auto pt-stack-lg">
+<div class="p-stack-md neo-glass rounded-xl flex items-center gap-stack-sm">
+<div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary p-[2px]">
+<img alt="User" class="w-full h-full rounded-full bg-surface-container object-cover" data-alt="A professional 3D stylized avatar of a young creative professional with short dark hair, wearing sleek tech-wear. The avatar is set against a vibrant neon purple and cyan blurred background, maintaining a consistent glassmorphism aesthetic. Soft cinematic lighting highlights the smooth textures of the character's face." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVM6iBEm9ygCySVt116Le8v9e_MVn7_EnnQpcYkcpPT4gVPavwQy15t-EuUhIOEiklJlqjKrpjVU7ddntyl7j2onkDtbNde432JdGPIHy9vcGEQjc56Msurin_RUt_m70Po2-CYXfsGj8DvmQufkcWMWrrGI1Nx5u8-ryQGd9PZwNhKLVRm0RVeg9PG_Jni_uNQtlRJTihFP6H1PHMMvrmp5uQo13V2Uu1v_dD8OPU110zVgNg47vO3Gf7SvO3ypkAZSMQCMjUcxM"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Alex Rivera</p>
+<p class="text-[10px] text-on-surface-variant">Spark Tier: Gold</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 right-0 left-64 h-16 bg-white/5 backdrop-blur-[30px] flex justify-between items-center px-container-padding-desktop w-auto z-40">
+<div class="flex-1 max-w-md">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-black/40 border border-white/5 rounded-full py-2 pl-10 pr-4 text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all font-label-md text-label-md" placeholder="Search for quizzes..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-stack-lg">
+<div class="flex items-center gap-stack-sm text-secondary">
+<span class="material-symbols-outlined" data-icon="local_fire_department" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="font-label-md text-label-md font-bold">12 Day Streak</span>
+</div>
+<button class="text-on-surface-variant hover:text-secondary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-16 min-h-screen px-container-padding-desktop pb-stack-xl flex gap-stack-lg">
+<!-- Left Column: Primary Content -->
+<div class="flex-1 flex flex-col gap-stack-lg py-stack-lg">
+<!-- Hero Section -->
+<section class="relative neo-glass rounded-[24px] p-stack-xl overflow-hidden group">
+<div class="absolute top-0 right-0 w-1/2 h-full opacity-30 pointer-events-none transition-transform group-hover:scale-105 duration-700">
+<img class="w-full h-full object-cover" data-alt="Futuristic glowing crystalline sparks floating in a deep cosmic void. The particles emit vibrant violet and cyan light, creating elegant trails of energy. High-fidelity rendering with deep contrast and cinematic bokeh effects, perfectly matching a premium glassmorphism dark mode interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDl04ER1PUu3JHW3TG-B52heqg8Cgtej5ijcfu-UW0Vh9kZPrz64FiSsE38PEQdDaADRD4M9lRHze_3X43-9iiiwhWm9-r8y2C6qgJTtF2PmID7K_8PKamPE7QmojbJEoLlswQlTBayY-iueW_Wep7IQVqImTo7hDM3mu6hlDVXD-7uSuQ01zIPWLfvj-cgxPbvZSsm7HzMNHfYEbWhAKv4bn6fSv3QPldrLCwoX_2LsUurM_wpab1BgxfUZjxaGgWO9bTTfXTRXA"/>
+</div>
+<div class="relative z-10">
+<h2 class="font-display-lg text-display-lg text-on-surface mb-stack-sm">Ready for a challenge, <span class="text-gradient">Alex?</span></h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md mb-stack-lg">Your progress in Quantum Physics is at 84%. Finish the final module to claim your Master Badge.</p>
+<button class="bg-gradient-to-r from-primary to-secondary text-on-primary font-bold px-stack-xl py-3 rounded-xl glow-violet hover:scale-105 transition-all active:scale-95 font-label-md text-label-md uppercase tracking-wider">
+                        Continue Quest
+                    </button>
+</div>
+</section>
+<!-- Continue Learning Section -->
+<section>
+<div class="flex items-center justify-between mb-stack-md">
+<h3 class="font-headline-md text-headline-md">Continue Learning</h3>
+<a class="text-secondary font-label-md hover:underline" href="#">View All</a>
+</div>
+<div class="grid grid-cols-2 gap-stack-md">
+<!-- Quiz Card 1 -->
+<div class="neo-glass p-stack-md rounded-[24px] flex gap-stack-md items-center group cursor-pointer hover:bg-white/10 transition-all duration-300">
+<div class="w-20 h-20 rounded-xl bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover opacity-80" data-alt="A stylized 3D microscopic view of vibrant blue and purple organic molecules. The lighting is crisp and cinematic, emphasizing the complex structures of the cells. The overall aesthetic is clean, scientific, and futuristic, following a modern tech-educational design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAE2af07I9Spdmydyc1EfvJEJKSrwlZ6NEjcJ-yAaqsD5aeFJ4pLXzlaYN5NK8_L3DhM-Jrekiatz2g5pj4EFNx6fthIxVT8N7Z5-Va_PS2ohZ8fg2LXtBnqQZiJ8lvU4NGHlozj2GjwE8OltK8ZnPwwUvI0T1iHGpX9_cFMC68eq5EnWPDY9WeHddoZ7NBVIL87eXYF8xgSdhMVyhUofMe-nrAmHvJCX_RDjkIMUgEKP7Q28bHSELYxZ7QdE_AjIKzBL0yfpESnWw"/>
+</div>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md text-on-surface">Microbiology Basics</h4>
+<div class="w-full bg-white/10 h-1 rounded-full mt-2 overflow-hidden">
+<div class="bg-gradient-to-r from-primary to-secondary h-full w-[65%] glow-cyan"></div>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-1">65% Completed • Module 4/6</p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">play_circle</span>
+</div>
+<!-- Quiz Card 2 -->
+<div class="neo-glass p-stack-md rounded-[24px] flex gap-stack-md items-center group cursor-pointer hover:bg-white/10 transition-all duration-300">
+<div class="w-20 h-20 rounded-xl bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover opacity-80" data-alt="A low-poly 3D render of a Greek Parthenon temple at sunset. The architecture is bathed in warm violet and deep blue light, casting long stylized shadows. The mood is epic and educational, designed as a sleek module icon for a high-end learning application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLIznIH8qVFgbMAkJf2gm7YH_L8PgyAmYFW9DJwFyTQYkBiCBBkYnwqPd339dAhbojwOyD_prmTvBasLpGnX7W465YECLjg6w2CwM9-Ox-qKME56CQOtF6l--Ualn7imthsqwRI-v8TpMg7oKAdGAMra2SZdtOgESRMlp8Xn0i2Lr5wub7P8fEwUz1p5ObjZk6RXW7VqQhyUVpFu7FPKjvFwn6WEAW00XRK6nU_M2ZCw6ANRYFEtT0ryetiYz_kwVfgqOCTpgqflQ"/>
+</div>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md text-on-surface">Ancient Civilizations</h4>
+<div class="w-full bg-white/10 h-1 rounded-full mt-2 overflow-hidden">
+<div class="bg-gradient-to-r from-primary to-secondary h-full w-[30%] glow-cyan"></div>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-1">30% Completed • Module 2/8</p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">play_circle</span>
+</div>
+</div>
+</section>
+<!-- Top Categories (Bento Grid) -->
+<section>
+<div class="flex items-center justify-between mb-stack-md">
+<h3 class="font-headline-md text-headline-md">Top Categories</h3>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-stack-md">
+<!-- Tech -->
+<div class="neo-glass p-stack-md rounded-[24px] group cursor-pointer hover:scale-[1.02] transition-all">
+<div class="h-32 bg-primary/20 rounded-xl mb-stack-sm flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-5xl text-primary transition-transform group-hover:rotate-12 duration-500" data-icon="terminal">terminal</span>
+</div>
+<h5 class="font-label-md text-label-md text-on-surface">Technology</h5>
+<p class="text-[12px] text-on-surface-variant">1,240 Quizzes</p>
+</div>
+<!-- Science -->
+<div class="neo-glass p-stack-md rounded-[24px] group cursor-pointer hover:scale-[1.02] transition-all">
+<div class="h-32 bg-secondary/20 rounded-xl mb-stack-sm flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-5xl text-secondary transition-transform group-hover:rotate-12 duration-500" data-icon="biotech">biotech</span>
+</div>
+<h5 class="font-label-md text-label-md text-on-surface">Science</h5>
+<p class="text-[12px] text-on-surface-variant">856 Quizzes</p>
+</div>
+<!-- History -->
+<div class="neo-glass p-stack-md rounded-[24px] group cursor-pointer hover:scale-[1.02] transition-all">
+<div class="h-32 bg-tertiary-container/20 rounded-xl mb-stack-sm flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-5xl text-tertiary transition-transform group-hover:rotate-12 duration-500" data-icon="history">history</span>
+</div>
+<h5 class="font-label-md text-label-md text-on-surface">History</h5>
+<p class="text-[12px] text-on-surface-variant">642 Quizzes</p>
+</div>
+<!-- Pop Culture -->
+<div class="neo-glass p-stack-md rounded-[24px] group cursor-pointer hover:scale-[1.02] transition-all">
+<div class="h-32 bg-white/5 rounded-xl mb-stack-sm flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-5xl text-on-surface transition-transform group-hover:rotate-12 duration-500" data-icon="movie">movie</span>
+</div>
+<h5 class="font-label-md text-label-md text-on-surface">Pop Culture</h5>
+<p class="text-[12px] text-on-surface-variant">2,105 Quizzes</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Sidebar Stats -->
+<div class="w-80 py-stack-lg flex flex-col gap-stack-lg">
+<!-- Daily Streaks Card -->
+<section class="neo-glass p-stack-lg rounded-[24px] text-center">
+<div class="inline-flex p-stack-md bg-secondary/10 rounded-full mb-stack-md glow-cyan">
+<span class="material-symbols-outlined text-4xl text-secondary" data-icon="local_fire_department" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-1">12 Days</h4>
+<p class="font-label-md text-label-md text-on-surface-variant mb-stack-md">Current Streak</p>
+<div class="flex justify-between gap-1">
+<div class="w-full aspect-square neo-glass rounded-lg flex flex-col items-center justify-center p-1 border-primary/30">
+<span class="text-[10px] text-on-surface-variant">M</span>
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+</div>
+<div class="w-full aspect-square neo-glass rounded-lg flex flex-col items-center justify-center p-1 border-primary/30">
+<span class="text-[10px] text-on-surface-variant">T</span>
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+</div>
+<div class="w-full aspect-square neo-glass rounded-lg flex flex-col items-center justify-center p-1 border-primary/30">
+<span class="text-[10px] text-on-surface-variant">W</span>
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+</div>
+<div class="w-full aspect-square bg-secondary/20 rounded-lg flex flex-col items-center justify-center p-1 border-secondary">
+<span class="text-[10px] text-secondary font-bold">T</span>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+<div class="w-full aspect-square neo-glass rounded-lg flex flex-col items-center justify-center p-1 opacity-40">
+<span class="text-[10px] text-on-surface-variant">F</span>
+</div>
+<div class="w-full aspect-square neo-glass rounded-lg flex flex-col items-center justify-center p-1 opacity-40">
+<span class="text-[10px] text-on-surface-variant">S</span>
+</div>
+<div class="w-full aspect-square neo-glass rounded-lg flex flex-col items-center justify-center p-1 opacity-40">
+<span class="text-[10px] text-on-surface-variant">S</span>
+</div>
+</div>
+</section>
+<!-- Top Scorers Leaderboard -->
+<section class="neo-glass p-stack-lg rounded-[24px]">
+<h4 class="font-label-md text-label-md text-on-surface mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="stars">stars</span>
+                    Top Scorers
+                </h4>
+<div class="flex flex-col gap-stack-md">
+<!-- Rank 1 -->
+<div class="flex items-center gap-stack-md group cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs">1</div>
+<div class="w-10 h-10 rounded-full overflow-hidden bg-white/5">
+<img class="w-full h-full object-cover" data-alt="A detailed 3D avatar of a futuristic female explorer with glowing neon blue hair and high-tech eyewear. Set against a dark, atmospheric purple background with soft focus light spheres. Clean surfaces and premium 3D design style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHlpdu5_wiCXjGTiIklI35KJWCo_iEy3YHHaV9x4-ntvmVu-1y1a5HsyVQYU3wwtlrBaEsYL6ioouduCNU7CXHFeuSQJp6Jmrhx3Csf2H3gLiIAAmOyI4Qfm7T0TRHMsBp5KUwjruywP8XpZ41jZEKA6WTO3Q_dz_36bu20D2OEfnacKDQxU7KRJDNUJOiTJYTJ3tcmZ04uD8hCTPW7ckXMujfzFUdrLEcltekENM7cl-wXmJHXHuIAeskWwy-QEw4MDmxMPc9-34"/>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md group-hover:text-primary transition-colors">Nova Spark</p>
+<p class="text-[10px] text-on-surface-variant">24,500 XP</p>
+</div>
+</div>
+<!-- Rank 2 -->
+<div class="flex items-center gap-stack-md group cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-on-surface-variant font-bold text-xs">2</div>
+<div class="w-10 h-10 rounded-full overflow-hidden bg-white/5">
+<img class="w-full h-full object-cover" data-alt="A 3D character avatar of a male coder wearing sleek headphones and a minimal hoodie. Soft directional lighting from a side neon source creates deep shadows and vibrant highlights. Futuristic digital artist style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfbJ0hLpMR9Ktxvlxzj20j-1csYXvO5aud9AfHTT4wxyZK-5a4XXuNPYfPXcFvH-l2E9M7-35TpEDMk0kSD1ADG8pPnLBhGQD9aN8oh4r6v9lNwDxPLYHPqf1OxnPMx744qZBU0y2kxY3ZrWHSDRq4IumIbDK7s8IAa1c2L1WFTLhEtABp92lSwJeUTzPgWfjx8a7uuOcE2iWo-f_ShznJF-Fuc43FKnOUTY8XKlSD6aCi2Wkmv7NGALA7mZwKDBcPKOgOj4pKDxs"/>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md group-hover:text-primary transition-colors">Quantum Dev</p>
+<p class="text-[10px] text-on-surface-variant">22,180 XP</p>
+</div>
+</div>
+<!-- Rank 3 -->
+<div class="flex items-center gap-stack-md group cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-on-surface-variant font-bold text-xs">3</div>
+<div class="w-10 h-10 rounded-full overflow-hidden bg-white/5">
+<img class="w-full h-full object-cover" data-alt="A highly detailed 3D avatar of a researcher in a futuristic lab coat with neon accents. Minimalist clean render with high-key lighting, emphasizing soft textures and professional aesthetic for a learning platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuALVhg8OecRVQpQNsbqyxvPosOVKlpG7-Raf8jIcVsSNJUTXxoq59stMwyNJvPS_Vaq-o52vvXXRVSBxPrPQGW6e7-pSIt6UNSyLRFsagd-I9dUZS9H0oIvLHeQPrFVP1PNZ4bnOjybCPLsTXK346z_OL-fZ2NqffANZitnSFtVnx-3rljQk0SQuPkbr9_UWysYSghbFNo364eN6SJCataGHN3ERgTjMafB1yIq8RiAe1vBSmvYbOtlr6B2OnKnw8fyf41H74Q7yAM"/>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md group-hover:text-primary transition-colors">LabRat</p>
+<p class="text-[10px] text-on-surface-variant">21,050 XP</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-stack-lg py-2 border border-white/10 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all text-[12px] font-bold">
+                    Full Leaderboard
+                </button>
+</section>
+<!-- Quick Tip Card -->
+<div class="neo-glass p-stack-md rounded-[24px] bg-gradient-to-br from-primary/10 to-transparent">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="lightbulb">lightbulb</span>
+<p class="text-[12px] text-on-surface font-medium leading-relaxed">Tip: Reviewing your mistakes from yesterday can boost retention by 40%!</p>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interaction for hover states
+        document.querySelectorAll('.neo-glass').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // Search Bar Focus Effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.02]');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.02]');
+        });
+    </script>
+</body></html>
