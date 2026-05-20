@@ -7,7 +7,7 @@
 class ApiClient {
   constructor() {
     // Set to your deployed backend service URL (e.g., https://quizspark-backend.onrender.com)
-    this.productionBackendUrl = 'https://YOUR_BACKEND_URL.onrender.com';
+    this.productionBackendUrl = 'https://quiz-w.onrender.com';
     
     // Auto-detect environment: use local server on localhost, otherwise production URL
     this.apiBase = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
