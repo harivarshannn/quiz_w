@@ -360,10 +360,12 @@ document.addEventListener('DOMContentLoaded', () => {
     syncStreakDisplay();
   }
 
-  function syncStreakDisplay() {
+    function syncStreakDisplay() {
     const username = gameState.username || "Guest Player";
     let streakData = JSON.parse(localStorage.getItem('streakData') || '{}');
     const streakSpan = document.getElementById('streak-display');
+    const streakWidgetDisplay = document.getElementById('streak-widget-display');
+    const streakDaysContainer = document.getElementById('streak-days-container');
     
     let currentStreak = 0;
     if (streakData[username]) {
@@ -379,8 +381,34 @@ document.addEventListener('DOMContentLoaded', () => {
       currentStreak = streakData[username].streak;
     }
     
-    if (streakSpan) {
-      streakSpan.textContent = currentStreak + " Day Streak";
+    if (streakSpan) streakSpan.textContent = currentStreak + " Day Streak";
+    if (streakWidgetDisplay) streakWidgetDisplay.textContent = currentStreak + " Days";
+
+    if (streakDaysContainer) {
+      const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+      let html = '';
+      for (let i = 0; i < 7; i++) {
+        if (i < currentStreak % 7) {
+          // Completed day
+          html += `<div class="flex-grow aspect-square neo-glass rounded-lg flex flex-col items-center justify-center p-1 border-primary/30 text-[10px] font-bold">
+            <span class="text-on-surface-variant text-[8px] mb-0.5">${days[i]}</span>
+            <span class="material-symbols-outlined text-primary text-xs" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+          </div>`;
+        } else if (i === currentStreak % 7) {
+          // Current day (not yet completed, or just indicating it's the next step)
+          // For simplicity, we just mark it active/pending
+          html += `<div class="flex-grow aspect-square bg-secondary/20 rounded-lg flex flex-col items-center justify-center p-1 border border-secondary text-[10px] font-bold">
+            <span class="text-secondary text-[8px] mb-0.5">${days[i]}</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+          </div>`;
+        } else {
+          // Future day
+          html += `<div class="flex-grow aspect-square neo-glass rounded-lg flex flex-col items-center justify-center p-1 opacity-40 text-[10px] font-bold">
+            <span class="text-on-surface-variant text-[8px]">${days[i]}</span>
+          </div>`;
+        }
+      }
+      streakDaysContainer.innerHTML = html;
     }
   }
 
@@ -531,10 +559,29 @@ function syncUsername(name) {
     });
   }
 
+  
+  // AI Generator Button
+  const aiGenerateBtn = document.getElementById('ai-generate-btn');
+  if (aiGenerateBtn) {
+    aiGenerateBtn.addEventListener('click', () => {
+      const topicInput = document.getElementById('ai-topic-input');
+      const diffSelect = document.getElementById('ai-difficulty-select');
+      
+      const topic = topicInput ? (topicInput.value.trim() || 'JavaScript') : 'JavaScript';
+      const diff = diffSelect ? (diffSelect.value || 'Medium') : 'Medium';
+
+      gameState.selectedCategory = topic;
+      gameState.selectedDifficulty = diff;
+      gameState.aiModeEnabled = true;
+
+      launchQuiz();
+      Sound.initContext();
+    });
+  }
+
   // Dashboard category clicks launch active quiz instantly
   const dashCategoryTriggers = document.querySelectorAll('.dash-category-trigger');
-  dashCategoryTriggers.forEach(card => {
-    card.addEventListener('click', () => {
+  dashCategoryTriggers.forEach(card => { card.addEventListener('click', () => { gameState.aiModeEnabled = false; 
       launchQuiz();
       Sound.initContext();
     });
@@ -542,8 +589,7 @@ function syncUsername(name) {
 
   // Dashboard quick-start clicks launch active quiz instantly
   const dashQuickStarts = document.querySelectorAll('.dash-quick-start');
-  dashQuickStarts.forEach(card => {
-    card.addEventListener('click', () => {
+  dashQuickStarts.forEach(card => { card.addEventListener('click', () => { gameState.aiModeEnabled = false; 
       const diff = card.getAttribute('data-difficulty') || 'Medium';
       
       gameState.selectedCategory = 'Tech & Coding';
