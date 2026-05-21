@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Clear timers
       clearInterval(gameState.timerInterval);
       
-      switchScreen(tabName);
+            switchScreen(tabName);
       Sound.initContext();
     });
   });
@@ -938,11 +938,10 @@ function syncUsername(name) {
     }
 
     if (skipBtn) skipBtn.style.display = 'none';
-    if (nextBtn) {
+        if (nextBtn) {
       nextBtn.style.display = 'flex';
       nextBtn.disabled = false;
     }
-);
   }
 
   // Next Question trigger
