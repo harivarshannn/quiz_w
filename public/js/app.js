@@ -39,7 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
     'results-score': 'Concluded total score xp accumulation text label',
     'results-ratio': 'Concluded correct answers fraction showcase label text',
     'results-time': 'Concluded total spent seconds duration label',
-    'restart-btn': 'Play again restart flow trigger link button',
+    'restart-btn': 'Dashboard return btn',
+    'next-level-btn': 'Next level trigger',
     'share-btn': 'Share clipboard copy triggers click button link',
     'leaderboard-rows': 'Full-sized leaderboard scores table body grid container',
     'library-category-filter': 'Questions library dropdown category sorting select',
@@ -679,7 +680,7 @@ function syncUsername(name) {
     
     const difficultyVal = libraryDifficultyFilter ? libraryDifficultyFilter.value : 'All';
     
-    let filteredQuestions = API.localQuestionsFallback;
+    let filteredQuestions = JSON.parse(localStorage.getItem('completedLibrary') || '[]');
 
     // Difficulty filter
     if (difficultyVal !== 'All') {
@@ -1147,6 +1148,16 @@ function syncUsername(name) {
     const ringOffset = ringCircumference - (accuracy / 100) * ringCircumference;
     
     updateStreak();
+    
+    // Save completed questions to library
+    let completedLib = JSON.parse(localStorage.getItem('completedLibrary') || '[]');
+    gameState.questionsList.forEach(q => {
+      if (!completedLib.find(existing => existing.id === q.id || existing.question === q.question)) {
+        completedLib.push(q);
+      }
+    });
+    localStorage.setItem('completedLibrary', JSON.stringify(completedLib));
+
     switchScreen('results');
     
     setTimeout(() => {
@@ -1337,6 +1348,20 @@ function syncUsername(name) {
   }
 
   // Restart trigger returns player to Home Dashboard
+  
+  const nextLevelBtn = document.getElementById('next-level-btn');
+  if (nextLevelBtn) {
+    nextLevelBtn.addEventListener('click', () => {
+      Sound.initContext();
+      // Bump difficulty
+      if (gameState.selectedDifficulty === 'Easy') gameState.selectedDifficulty = 'Medium';
+      else if (gameState.selectedDifficulty === 'Medium') gameState.selectedDifficulty = 'Hard';
+      else gameState.selectedDifficulty = 'Hard'; // Cap at hard
+      
+      launchQuiz();
+    });
+  }
+
   if (restartBtn) {
     restartBtn.addEventListener('click', () => {
       Sound.initContext();

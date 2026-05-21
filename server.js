@@ -54,19 +54,22 @@ async function writeDB(data) {
 }
 
 // Helper: Generate Questions via Groq AI
-async function generateAIQuestions(difficulty) {
+async function generateAIQuestions(difficulty, category) {
   if (!groq) {
     console.error('Groq client not initialized. Check your GROQ_API_KEY.');
     return null;
   }
 
+  const topic = category && category !== 'All' ? category : 'General Tech & Coding';
+
   const systemPrompt = `You are a professional coding quiz generator. 
-Generate exactly 6 unique multiple-choice questions about 'Tech & Coding' with difficulty level '${difficulty}'.
+Generate exactly 6 unique, highly varied multiple-choice questions specifically about '${topic}' with difficulty level '${difficulty}'.
+Ensure the questions are not generic. Use randomization in your generation to guarantee different topics within '${topic}' are covered each time.
 Return ONLY a valid JSON array of objects. Do not include any markdown formatting, backticks, or extra text.
 
 Each object must follow this EXACT schema:
 {
-  "category": "Tech & Coding",
+  "category": "${topic}",
   "difficulty": "${difficulty}",
   "question": "string",
   "options": ["string", "string", "string", "string"],
@@ -77,10 +80,10 @@ Each object must follow this EXACT schema:
     const chatCompletion = await groq.chat.completions.create({
       messages: [
         { role: 'system', content: systemPrompt },
-        { role: 'user', content: `Generate 6 ${difficulty} coding questions.` }
+        { role: 'user', content: `Generate 6 ${difficulty} ${topic} questions. Make them completely unique and different from typical common examples. Use seed: ${Math.random()}` }
       ],
       model: 'llama-3.3-70b-versatile',
-      temperature: 0.7,
+      temperature: 0.9,
       stream: false,
       response_format: { type: "json_object" }
     });
@@ -119,7 +122,7 @@ app.get('/api/questions', async (req, res) => {
       
       if (process.env.GROQ_API_KEY) {
         console.log(`[Server] GROQ_API_KEY is present. Calling Groq API...`);
-        const aiQuestions = await generateAIQuestions(difficulty || 'Medium');
+        const aiQuestions = await generateAIQuestions(difficulty || 'Medium', category);
         
         if (aiQuestions && aiQuestions.length > 0) {
           console.log(`[Server] Successfully generated ${aiQuestions.length} questions from Groq.`);
