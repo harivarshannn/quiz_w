@@ -62,11 +62,14 @@ async function generateAIQuestions(difficulty, category) {
 
   const topic = category && category !== 'All' ? category : 'General Tech & Coding';
 
-  const systemPrompt = `You are a professional coding quiz generator. 
-Generate exactly 6 unique, highly technical multiple-choice questions specifically and ONLY about '${topic}' at a '${difficulty}' level.
-Ensure the questions cover deep aspects of ${topic} and are not generic. Use randomization in your generation to guarantee different sub-topics within '${topic}' are covered each time.
-NEVER repeat the same question. Use different phrasing and focus areas.
-Return ONLY a valid JSON array of objects. Do not include any markdown formatting, backticks, or extra text.
+  const systemPrompt = `You are an elite software engineering examiner.
+Generate 6 advanced, unique multiple-choice questions EXCLUSIVELY about '${topic}' with '${difficulty}' difficulty.
+CRITICAL RULES:
+1. NO JAVASCRIPT questions unless the topic IS JavaScript.
+2. NO REPEATS. Each question must cover a different sub-topic within ${topic} (e.g. for Python: decorators, generators, GIL, async, memory management, data types).
+3. NO GENERIC QUESTIONS. Focus on technical specifics, syntax, and performance.
+4. VARIETY: Use a unique random seed (${Math.random()}) to ensure the response is different every single time.
+Return ONLY a valid JSON array of 6 objects matching the schema.
 
 Each object must follow this EXACT schema:
 {

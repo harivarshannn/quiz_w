@@ -36,7 +36,7 @@ class ApiClient {
     }
 
     try {
-      const url = `${this.apiBase}/api/questions?category=Tech%20%26%20Coding&difficulty=${encodeURIComponent(difficulty)}&ai=${aiMode}`;
+      const url = `${this.apiBase}/api/questions?category=${encodeURIComponent(category)}&difficulty=${encodeURIComponent(difficulty)}&ai=${aiMode}`;
       const response = await fetch(url);
       if (!response.ok) throw new Error('API server returned error status');
       return await response.json();
@@ -66,7 +66,7 @@ class ApiClient {
 
   // Submit player score
   async submitScore(username, score, category, difficulty, accuracy) {
-    const payload = { username, score, category: 'Tech & Coding', difficulty, accuracy };
+    const payload = { username, score, category, difficulty, accuracy };
     
     if (this.isLocalOfflineMode) {
       const localEntry = { ...payload, date: new Date().toISOString() };

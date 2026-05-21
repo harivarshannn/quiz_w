@@ -814,8 +814,8 @@ function syncUsername(name) {
     gameState.selectedOptionText = '';
     
     // Toggle action control buttons
-    skipBtn.style.display = 'block';
-    nextBtn.style.display = 'none';
+    skipBtn.classList.remove('hidden'); skipBtn.style.display = 'block';
+    nextBtn.classList.add('hidden'); nextBtn.style.display = 'none';
     
     const currentQ = gameState.questionsList[gameState.currentQuestionIndex];
     
@@ -937,9 +937,9 @@ function syncUsername(name) {
       Sound.playWrong();
     }
 
-    if (skipBtn) skipBtn.style.display = 'none';
+    if (skipBtn) skipBtn.classList.add('hidden'); skipBtn.style.display = 'none';
         if (nextBtn) {
-      nextBtn.style.display = 'flex';
+      nextBtn.classList.remove('hidden'); nextBtn.style.display = 'flex';
       nextBtn.disabled = false;
     }
   }
@@ -1035,7 +1035,7 @@ function syncUsername(name) {
       }
     });
 
-    skipBtn.style.display = 'none';
+    skipBtn.classList.add('hidden'); skipBtn.style.display = 'none';
     nextBtn.style.display = 'block';
     nextBtn.disabled = false;
   }
