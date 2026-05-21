@@ -472,12 +472,6 @@ function syncUsername(name) {
       
       // Play a detuned buzzer exit chord
             Sound.playWrong();
-      
-      const eb = document.getElementById('explain-btn');
-      if (eb) {
-        eb.classList.remove('hidden');
-        eb.style.display = 'flex';
-      }
 
       
       document.body.classList.add('logged-out');
@@ -939,7 +933,7 @@ function syncUsername(name) {
         labelMarker.classList.add('border-accent-magenta', 'bg-accent-magenta/20', 'text-accent-magenta');
       }
 
-      allOptionBtns.forEach(btn => {
+            allOptionBtns.forEach(btn => {
         const textSpan = btn.querySelector('.select-opt-text');
         if (textSpan && textSpan.textContent === currentQ.correctAnswer) {
           btn.classList.add('correct-outline');
@@ -948,6 +942,12 @@ function syncUsername(name) {
         }
       });
       Sound.playWrong();
+      
+      const eb = document.getElementById('explain-btn');
+      if (eb) {
+        eb.classList.remove('hidden');
+        eb.style.display = 'flex';
+      }
     }
 
     if (skipBtn) skipBtn.classList.add('hidden'); skipBtn.style.display = 'none';
