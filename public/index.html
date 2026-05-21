@@ -708,6 +708,10 @@
 
         <!-- Bottom Controls Row -->
         <div class="flex justify-end gap-3 mt-4">
+          <button id="explain-btn" class="px-6 py-3 rounded-xl border border-secondary/30 text-secondary font-bold text-xs hover:bg-secondary/10 active:scale-95 transition-all hidden items-center gap-2">
+            <span class="material-symbols-outlined text-sm">lightbulb</span>
+            <span>Explain Why</span>
+          </button>
           <button id="skip-btn" class="px-6 py-3 rounded-xl border border-[#333336] text-on-surface-variant font-bold text-xs hover:bg-[#1A1A1D] active:scale-95 transition-all">
             Skip Question
           </button>
@@ -795,6 +799,27 @@
   <footer class="text-center py-6 text-[10px] text-on-surface-variant/40 border-t border-[#333336] relative z-10 w-full mt-auto">
     <p>&copy; 2026 TechQuiz. Modern Assessment Platform.</p>
   </footer>
+
+  <!-- Explanation Modal Popup -->
+  <div id="explain-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" id="explain-modal-overlay"></div>
+    <div class="relative neo-glass rounded-3xl p-8 max-w-lg w-[90%] border border-white/10 shadow-2xl flex flex-col gap-5">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary">
+          <span class="material-symbols-outlined">lightbulb</span>
+        </div>
+        <h3 class="font-headline text-xl font-bold text-white">AI Explanation</h3>
+      </div>
+      
+      <div id="explain-content" class="text-sm text-on-surface-variant leading-relaxed min-h-[60px]">
+        <!-- AI response injected here -->
+      </div>
+      
+      <button id="close-explain-btn" class="w-full bg-secondary/10 text-secondary font-bold py-3 rounded-xl hover:bg-secondary/20 transition-all text-xs uppercase tracking-widest border border-secondary/30 mt-2">
+        Got it!
+      </button>
+    </div>
+  </div>
 
   <!-- Core Javascript Engines -->
   <script src="js/sound.js"></script>

@@ -90,6 +90,27 @@ class ApiClient {
     }
   }
 
+  // Fetch AI Explanation
+  async getExplanation(payload) {
+    if (this.isLocalOfflineMode) {
+      return "Explanations are only available in Online Mode.";
+    }
+
+    try {
+      const response = await fetch(`${this.apiBase}/api/explain`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!response.ok) throw new Error('API server failed to provide explanation');
+      const data = await response.json();
+      return data.explanation;
+    } catch (error) {
+      console.error('Explanation Error:', error);
+      return "Could not retrieve an AI explanation at this time.";
+    }
+  }
+
   // Helper: Filter fallback questions pools
   getFilteredFallbackQuestions(difficulty) {
     let pool = this.localQuestionsFallback;

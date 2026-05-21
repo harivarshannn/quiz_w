@@ -62,14 +62,14 @@ async function generateAIQuestions(difficulty, category) {
 
   const topic = category && category !== 'All' ? category : 'General Tech & Coding';
 
-  const systemPrompt = `You are an elite software engineering examiner.
-Generate 6 advanced, unique multiple-choice questions EXCLUSIVELY about '${topic}' with '${difficulty}' difficulty.
-CRITICAL RULES:
-1. NO JAVASCRIPT questions unless the topic IS JavaScript.
-2. NO REPEATS. Each question must cover a different sub-topic within ${topic} (e.g. for Python: decorators, generators, GIL, async, memory management, data types).
-3. NO GENERIC QUESTIONS. Focus on technical specifics, syntax, and performance.
-4. VARIETY: Use a unique random seed (${Math.random()}) to ensure the response is different every single time.
-Return ONLY a valid JSON array of 6 objects matching the schema.
+  const systemPrompt = `You are a world-class senior software architect and examiner.
+Generate 6 highly technical, unique multiple-choice questions EXCLUSIVELY about the language: '${topic}'.
+CRITICAL MANDATES:
+1. ONLY '${topic}' questions. If topic is Python, questions must be about Python syntax, standard library, or idioms. NO JAVASCRIPT.
+2. HIGH VARIETY: Cover advanced areas like memory management, concurrency, design patterns, and recent version updates.
+3. NO REPETITION: Use random seed ${Math.floor(Math.random() * 1000000)} to force a fresh set every time.
+4. Professional tone. Technical depth.
+Return ONLY valid JSON array.
 
 Each object must follow this EXACT schema:
 {
@@ -88,7 +88,7 @@ Each object must follow this EXACT schema:
         { role: 'user', content: `Generate 6 ${difficulty} ${topic} questions. Use randomization seed: ${seed}. Ensure they are technical and specific to ${topic}.` }
       ],
       model: 'llama-3.3-70b-versatile',
-      temperature: 0.9,
+      temperature: 1.0,
       stream: false,
       response_format: { type: "json_object" }
     });
@@ -110,6 +110,40 @@ Each object must follow this EXACT schema:
   } catch (error) {
     console.error('Groq AI Generation Error:', error);
     return null;
+  }
+}
+
+// Helper: Generate Explanation via Groq AI
+async function generateAIExplanation(question, wrongAnswer, correctAnswer, topic) {
+  if (!groq) {
+    return "AI explanation is unavailable because the Groq API key is missing.";
+  }
+
+  const systemPrompt = `You are a helpful software engineering tutor.
+The user is taking a quiz about '${topic}'.
+They just answered a question incorrectly.
+Question: "${question}"
+Their Answer: "${wrongAnswer}"
+Correct Answer: "${correctAnswer}"
+
+Explain why the correct answer is correct and why the user's answer might be a common misconception.
+Be extremely concise. Use exactly 2 clear sentences.`;
+
+  try {
+    const chatCompletion = await groq.chat.completions.create({
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: "Explain this to me concisely." }
+      ],
+      model: 'llama-3.3-70b-versatile',
+      temperature: 0.5,
+      stream: false
+    });
+
+    return chatCompletion.choices[0]?.message?.content || "Could not generate an explanation at this time.";
+  } catch (error) {
+    console.error('Groq AI Explanation Error:', error);
+    return "An error occurred while generating the AI explanation.";
   }
 }
 

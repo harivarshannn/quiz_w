@@ -41,6 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
     'results-time': 'Concluded total spent seconds duration label',
     'restart-btn': 'Dashboard return btn',
     'next-level-btn': 'Next level trigger',
+    'explain-btn': 'Show AI explanation trigger button',
+    'explain-modal': 'Explanation popup container',
+    'explain-content': 'AI explanation text target',
     'share-btn': 'Share clipboard copy triggers click button link',
     'leaderboard-rows': 'Full-sized leaderboard scores table body grid container',
     'library-category-filter': 'Questions library dropdown category sorting select',
@@ -468,7 +471,14 @@ function syncUsername(name) {
       syncUsername('');
       
       // Play a detuned buzzer exit chord
-      Sound.playWrong();
+            Sound.playWrong();
+      
+      const eb = document.getElementById('explain-btn');
+      if (eb) {
+        eb.classList.remove('hidden');
+        eb.style.display = 'flex';
+      }
+
       
       document.body.classList.add('logged-out');
       
@@ -809,13 +819,16 @@ function syncUsername(name) {
   }
 
   function renderActiveQuestion() {
+    const eb = document.getElementById('explain-btn');
+    if (eb) { eb.classList.add('hidden'); eb.style.display = 'none'; }
+
     // Reset question interactions
     gameState.hasAnsweredActiveQuestion = false;
     gameState.selectedOptionText = '';
     
     // Toggle action control buttons
     skipBtn.classList.remove('hidden'); skipBtn.style.display = 'block';
-    nextBtn.classList.add('hidden'); nextBtn.style.display = 'none';
+    nextBtn.classList.add('hidden'); nextBtn.setAttribute('style', 'display: none !important'); nextBtn.classList.add('hidden');
     
     const currentQ = gameState.questionsList[gameState.currentQuestionIndex];
     
@@ -939,7 +952,7 @@ function syncUsername(name) {
 
     if (skipBtn) skipBtn.classList.add('hidden'); skipBtn.style.display = 'none';
         if (nextBtn) {
-      nextBtn.classList.remove('hidden'); nextBtn.style.display = 'flex';
+      nextBtn.classList.remove('hidden'); nextBtn.setAttribute('style', 'display: flex !important'); nextBtn.classList.remove('hidden');
       nextBtn.disabled = false;
     }
   }
@@ -1276,6 +1289,34 @@ function syncUsername(name) {
       renderLeaderboard(backupData);
     }
   }
+
+  
+  const explainBtn = document.getElementById('explain-btn');
+  const explainModal = document.getElementById('explain-modal');
+  const explainContent = document.getElementById('explain-content');
+  const closeExplainBtn = document.getElementById('close-explain-btn');
+  const explainOverlay = document.getElementById('explain-modal-overlay');
+
+  if (explainBtn) {
+    explainBtn.addEventListener('click', async () => {
+      if (explainModal) explainModal.classList.remove('hidden');
+      if (explainContent) explainContent.innerHTML = '<div class="flex items-center gap-2"><svg class="animate-spin h-4 w-4 text-secondary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Generating explanation...</div>';
+      
+      const currentQ = gameState.questionsList[gameState.currentQuestionIndex];
+      const explanation = await API.getExplanation({
+        question: currentQ.question,
+        wrongAnswer: gameState.selectedOptionText,
+        correctAnswer: currentQ.correctAnswer,
+        topic: gameState.selectedCategory
+      });
+      
+      if (explainContent) explainContent.textContent = explanation;
+    });
+  }
+
+  const closeEX = () => { if (explainModal) explainModal.classList.add('hidden'); };
+  if (closeExplainBtn) closeExplainBtn.addEventListener('click', closeEX);
+  if (explainOverlay) explainOverlay.addEventListener('click', closeEX);
 
   // Restart trigger returns player to Home Dashboard
   
