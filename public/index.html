@@ -19,28 +19,132 @@
   <!-- Tailwind CSS Engine & Core Stylesheets -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            background: "#0A0A0C",
-            primary: "#d0bcff",
-            secondary: "#4cd7f6",
-            surface: "#131315",
-            "surface-container": "#201f21",
-            "on-surface": "#e5e1e4",
-            "on-surface-variant": "#cbc3d7"
-          },
-          fontFamily: {
-            headline: ["Plus Jakarta Sans", "sans-serif"],
-            body: ["Inter", "sans-serif"]
-          }
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#00424e",
+                        "on-error-container": "#ffdad6",
+                        "background": "#131315",
+                        "primary-fixed-dim": "#d0bcff",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#ffafd3",
+                        "on-primary": "#3c0091",
+                        "inverse-on-surface": "#313032",
+                        "primary-fixed": "#e9ddff",
+                        "surface-bright": "#39393b",
+                        "on-secondary-fixed": "#001f26",
+                        "on-tertiary-fixed-variant": "#85145a",
+                        "on-primary-fixed-variant": "#5516be",
+                        "on-primary-fixed": "#23005c",
+                        "on-secondary-fixed-variant": "#004e5c",
+                        "error-container": "#93000a",
+                        "on-tertiary": "#620040",
+                        "surface-container-high": "#2a2a2c",
+                        "on-surface-variant": "#cbc3d7",
+                        "surface-tint": "#d0bcff",
+                        "primary-container": "#a078ff",
+                        "surface": "#131315",
+                        "secondary": "#4cd7f6",
+                        "primary": "#d0bcff",
+                        "surface-container-highest": "#353437",
+                        "tertiary-fixed": "#ffd8e7",
+                        "surface-variant": "#353437",
+                        "surface-container": "#201f21",
+                        "surface-dim": "#131315",
+                        "secondary-fixed-dim": "#4cd7f6",
+                        "outline": "#958ea0",
+                        "secondary-container": "#03b5d3",
+                        "on-tertiary-container": "#560038",
+                        "on-primary-container": "#340080",
+                        "surface-container-low": "#1c1b1d",
+                        "on-surface": "#e5e1e4",
+                        "tertiary": "#ffafd3",
+                        "surface-container-lowest": "#0e0e10",
+                        "on-secondary": "#003640",
+                        "inverse-primary": "#6d3bd7",
+                        "tertiary-container": "#e364a7",
+                        "on-error": "#690005",
+                        "inverse-surface": "#e5e1e4",
+                        "outline-variant": "#494454",
+                        "on-tertiary-fixed": "#3d0026",
+                        "on-background": "#e5e1e4",
+                        "secondary-fixed": "#acedff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "gutter": "16px",
+                        "container-padding-desktop": "40px",
+                        "stack-md": "16px",
+                        "stack-xl": "64px",
+                        "container-padding-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                }
+            }
         }
-      }
-    }
-  </script>
+    </script>
   <link rel="stylesheet" href="css/style.css">
+<style>
+        body {
+            background-color: #0A0A0C;
+            overflow-x: hidden;
+        }
+        .neo-glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glow-violet {
+            filter: drop-shadow(0 0 20px rgba(208, 188, 255, 0.3));
+        }
+        .glow-cyan {
+            filter: drop-shadow(0 0 20px rgba(76, 215, 246, 0.3));
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #d0bcff, #4cd7f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .radial-blob {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+            opacity: 0.15;
+        }
+    </style>
 </head>
 <body class="text-on-surface font-body bg-background min-h-screen relative overflow-x-hidden flex flex-col">
 
@@ -85,8 +189,8 @@
             <img id="sidebar-avatar-img" class="w-full h-full rounded-full bg-surface-container object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVM6iBEm9ygCySVt116Le8v9e_MVn7_EnnQpcYkcpPT4gVPavwQy15t-EuUhIOEiklJlqjKrpjVU7ddntyl7j2onkDtbNde432JdGPIHy9vcGEQjc56Msurin_RUt_m70Po2-CYXfsGj8DvmQufkcWMWrrGI1Nx5u8-ryQGd9PZwNhKLVRm0RVeg9PG_Jni_uNQtlRJTihFP6H1PHMMvrmp5uQo13V2Uu1v_dD8OPU110zVgNg47vO3Gf7SvO3ypkAZSMQCMjUcxM" alt="User Avatar">
           </div>
           <div class="overflow-hidden">
-            <p id="sidebar-profile-name" class="text-sm font-semibold truncate text-on-surface">Alex Rivera</p>
-            <p id="sidebar-profile-level" class="text-[10px] text-primary font-bold">Star Tier: Gold</p>
+            <p id="sidebar-profile-name" class="text-sm font-semibold truncate text-on-surface">Guest Player</p>
+            <p id="sidebar-profile-level" class="text-[10px] text-primary font-bold">Star Tier: Unranked</p>
           </div>
         </div>
         <button id="logout-btn" class="w-8 h-8 rounded-lg flex items-center justify-center bg-[#1A1A1D] border border-[#333336] text-on-surface-variant hover:text-red-400 hover:bg-red-500/10 active:scale-95 transition-all flex-shrink-0" title="Exit / Logout">
@@ -125,7 +229,7 @@
 
       <div class="flex items-center gap-1 text-secondary">
         <span class="material-symbols-outlined text-sm md:text-base" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
-        <span class="text-[11px] md:text-sm font-bold tracking-tight">12 Day Streak</span>
+        <span id="streak-display" class="text-[11px] md:text-sm font-bold tracking-tight">0 Day Streak</span>
       </div>
 
       <!-- Volume Mute Trigger -->
@@ -196,8 +300,8 @@
             <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDl04ER1PUu3JHW3TG-B52heqg8Cgtej5ijcfu-UW0Vh9kZPrz64FiSsE38PEQdDaADRD4M9lRHze_3X43-9iiiwhWm9-r8y2C6qgJTtF2PmID7K_8PKamPE7QmojbJEoLlswQlTBayY-iueW_Wep7IQVqImTo7hDM3mu6hlDVXD-7uSuQ01zIPWLfvj-cgxPbvZSsm7HzMNHfYEbWhAKv4bn6fSv3QPldrLCwoX_2LsUurM_wpab1BgxfUZjxaGgWO9bTTfXTRXA" alt="Ambient Crystalline Stars">
           </div>
           <div class="relative z-10 max-w-lg">
-            <h2 class="font-headline text-3xl md:text-4xl text-on-surface mb-2 font-extrabold tracking-tight">Ready for a challenge, <span id="hero-welcome-name" class="text-primary">Alex Rivera?</span></h2>
-            <p class="text-sm md:text-base text-on-surface-variant max-w-md mb-6 leading-relaxed">Your progress in Tech & Coding is at 60%. Launch a dynamic Intermediate module and raise your highscore!</p>
+            <h2 class="font-headline text-3xl md:text-4xl text-on-surface mb-2 font-extrabold tracking-tight">Ready for a challenge, <span id="hero-welcome-name" class="text-primary">Guest Player?</span></h2>
+            <p class="text-sm md:text-base text-on-surface-variant max-w-md mb-6 leading-relaxed">Your progress in Tech & Coding is at 0%. Launch a dynamic module and start your journey!</p>
             <button id="hero-continue-btn" class="bg-primary text-black font-bold px-8 py-3 rounded-xl  hover:scale-[1.03] active:scale-95 transition-all font-headline text-xs uppercase tracking-wider">
               Continue Quest
             </button>
@@ -218,9 +322,9 @@
               <div class="flex-grow min-w-0">
                 <h4 class="text-sm font-semibold truncate text-on-surface">Tech & Coding</h4>
                 <div class="w-full bg-white/10 h-1.5 rounded-full mt-2 overflow-hidden">
-                  <div class="bg-primary h-full w-[60%] shadow-md"></div>
+                  <div class="bg-primary h-full w-[0%] shadow-md"></div>
                 </div>
-                <p class="text-[10px] text-on-surface-variant mt-1">Intermediate • 60% Completed</p>
+                <p class="text-[10px] text-on-surface-variant mt-1">Intermediate • 0% Completed</p>
               </div>
               <span class="material-symbols-outlined text-primary text-2xl opacity-0 group-hover:opacity-100 transition-opacity">play_circle</span>
             </div>

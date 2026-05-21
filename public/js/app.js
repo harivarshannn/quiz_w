@@ -187,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (savedUser) {
     document.body.classList.remove('logged-out');
     syncUsername(savedUser);
+    syncStreakDisplay();
     selectSetupCategory("Tech & Coding");
     updateDifficultyIndicator();
     loadHomeDashboard();
@@ -194,6 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     document.body.classList.add('logged-out');
     syncUsername('');
+    syncStreakDisplay();
     selectSetupCategory("Tech & Coding");
     updateDifficultyIndicator();
     switchScreen('login');
@@ -326,7 +328,63 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // PROFILE SYNCHRONIZATION
   // ==========================================
-  function syncUsername(name) {
+  
+  // ==========================================
+  // STREAK LOGIC
+  // ==========================================
+  function updateStreak() {
+    const today = new Date().toDateString();
+    const username = gameState.username || "Guest Player";
+    let streakData = JSON.parse(localStorage.getItem('streakData') || '{}');
+    
+    if (!streakData[username]) {
+      streakData[username] = { streak: 1, lastDate: today };
+    } else {
+      const lastDate = new Date(streakData[username].lastDate);
+      const todayDate = new Date(today);
+      const diffTime = todayDate - lastDate;
+      const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+      
+      if (diffDays === 1) {
+        streakData[username].streak += 1;
+        streakData[username].lastDate = today;
+      } else if (diffDays > 1) {
+        streakData[username].streak = 1;
+        streakData[username].lastDate = today;
+      } else if (diffDays === 0) {
+        // already played today
+      }
+    }
+    
+    localStorage.setItem('streakData', JSON.stringify(streakData));
+    syncStreakDisplay();
+  }
+
+  function syncStreakDisplay() {
+    const username = gameState.username || "Guest Player";
+    let streakData = JSON.parse(localStorage.getItem('streakData') || '{}');
+    const streakSpan = document.getElementById('streak-display');
+    
+    let currentStreak = 0;
+    if (streakData[username]) {
+      const lastDate = new Date(streakData[username].lastDate);
+      const todayDate = new Date(new Date().toDateString());
+      const diffTime = todayDate - lastDate;
+      const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+      
+      if (diffDays > 1) {
+        streakData[username].streak = 0;
+        localStorage.setItem('streakData', JSON.stringify(streakData));
+      }
+      currentStreak = streakData[username].streak;
+    }
+    
+    if (streakSpan) {
+      streakSpan.textContent = currentStreak + " Day Streak";
+    }
+  }
+
+function syncUsername(name) {
     gameState.username = name || "";
     const displayName = gameState.username || "Guest Player";
     
@@ -335,7 +393,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (resultsPlayerName) resultsPlayerName.textContent = displayName;
     if (usernameInput) usernameInput.value = gameState.username;
     if (loginUsernameInput) loginUsernameInput.value = gameState.username;
-  }
+  
+    syncStreakDisplay();
+}
 
   if (usernameInput) {
     usernameInput.addEventListener('input', () => {
@@ -1040,6 +1100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ringCircumference = 439.82;
     const ringOffset = ringCircumference - (accuracy / 100) * ringCircumference;
     
+    updateStreak();
     switchScreen('results');
     
     setTimeout(() => {
