@@ -1,5 +1,5 @@
 /**
- * QuizSpark Core Application Coordinator
+ * TechQuiz Core Application Coordinator
  * Manages game state, circular conic countdown timers, dynamic rendering,
  * real-time search filtering, mobile drawer transitions, and seamless SPA tab swappers.
  */
@@ -53,17 +53,17 @@ document.addEventListener('DOMContentLoaded', () => {
     'logout-btn': 'Exit current session trigger power button'
   };
 
-  console.log('⚡ [QuizSpark Diagnostics] Running full DOM element verification audit...');
+  console.log('⚡ [TechQuiz Diagnostics] Running full DOM element verification audit...');
   let hasDiagnosticWarnings = false;
   Object.keys(requiredSelectors).forEach(id => {
     const el = document.getElementById(id);
     if (!el) {
-      console.warn(`[QuizSpark Diagnostics] Warning: Required DOM element with ID "${id}" ("${requiredSelectors[id]}") was not found!`);
+      console.warn(`[TechQuiz Diagnostics] Warning: Required DOM element with ID "${id}" ("${requiredSelectors[id]}") was not found!`);
       hasDiagnosticWarnings = true;
     }
   });
   if (!hasDiagnosticWarnings) {
-    console.log('💚 [QuizSpark Diagnostics] All required UI elements are present and fully mapped!');
+    console.log('💚 [TechQuiz Diagnostics] All required UI elements are present and fully mapped!');
   }
 
   // ==========================================
@@ -222,10 +222,10 @@ document.addEventListener('DOMContentLoaded', () => {
     navButtons.forEach(btn => {
       const tabAttr = btn.getAttribute('data-tab');
       if (tabAttr === tabName) {
-        btn.classList.add('text-primary', 'bg-white/5', 'border-r-4', 'border-primary', 'font-bold');
+        btn.classList.add('text-primary', 'bg-[#1A1A1D]', 'border-r-4', 'border-primary', 'font-bold');
         btn.classList.remove('text-on-surface-variant', 'font-medium');
       } else {
-        btn.classList.remove('text-primary', 'bg-white/5', 'border-r-4', 'border-primary', 'font-bold');
+        btn.classList.remove('text-primary', 'bg-[#1A1A1D]', 'border-r-4', 'border-primary', 'font-bold');
         btn.classList.add('text-on-surface-variant', 'font-medium');
       }
     });
@@ -402,18 +402,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const cat = card.getAttribute('data-category');
       const badge = card.querySelector('.select-icon-badge');
       if (cat === categoryName) {
-        card.classList.add('active', 'border-primary', 'bg-white/10');
-        card.classList.remove('border-white/10');
+        card.classList.add('active', 'border-primary', 'bg-[#2A2A2D]');
+        card.classList.remove('border-[#333336]');
         if (badge) {
-          badge.classList.remove('bg-white/5', 'text-on-surface-variant');
-          badge.classList.add('bg-primary/10', 'text-primary');
+          badge.classList.remove('bg-[#1A1A1D]', 'text-on-surface-variant');
+          badge.classList.add('bg-primary/20', 'text-primary');
         }
       } else {
-        card.classList.remove('active', 'border-primary', 'bg-white/10');
-        card.classList.add('border-white/10');
+        card.classList.remove('active', 'border-primary', 'bg-[#2A2A2D]');
+        card.classList.add('border-[#333336]');
         if (badge) {
-          badge.classList.remove('bg-primary/10', 'text-primary');
-          badge.classList.add('bg-white/5', 'text-on-surface-variant');
+          badge.classList.remove('bg-primary/20', 'text-primary');
+          badge.classList.add('bg-[#1A1A1D]', 'text-on-surface-variant');
         }
       }
     });
@@ -601,7 +601,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     filteredQuestions.forEach((q, idx) => {
       const card = document.createElement('div');
-      card.className = 'glass-card p-5 rounded-3xl flex flex-col gap-3 relative overflow-hidden border border-white/5';
+      card.className = 'glass-card p-5 rounded-3xl flex flex-col gap-3 relative overflow-hidden border border-[#333336]';
       
       // Select badge styling classes based on difficulty
       let diffBadgeClass = 'bg-primary/15 text-primary border border-primary/20';
@@ -613,8 +613,8 @@ document.addEventListener('DOMContentLoaded', () => {
       q.options.forEach((opt, oIdx) => {
         const isCorrect = (opt === q.correctAnswer);
         const optStyles = isCorrect
-          ? 'border-secondary/40 bg-secondary/10 text-secondary'
-          : 'border-white/5 bg-white/5 text-on-surface-variant';
+          ? 'border-secondary/40 bg-secondary/20 text-secondary'
+          : 'border-[#333336] bg-[#1A1A1D] text-on-surface-variant';
         
         optionsListHtml += `
           <div class="flex items-center gap-2 text-xs border rounded-xl p-2 font-medium ${optStyles}">
@@ -627,7 +627,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       card.innerHTML = `
         <div class="flex justify-between items-center">
-          <span class="text-[9px] bg-white/5 px-2 py-0.5 rounded-full text-on-surface-variant uppercase tracking-wider font-bold border border-white/10">${escapeHtml(q.category)}</span>
+          <span class="text-[9px] bg-[#1A1A1D] px-2 py-0.5 rounded-full text-on-surface-variant uppercase tracking-wider font-bold border border-[#333336]">${escapeHtml(q.category)}</span>
           <span class="text-[9px] ${diffBadgeClass} px-2 py-0.5 rounded-full uppercase tracking-wider font-bold">${escapeHtml(q.difficulty)}</span>
         </div>
         <h4 class="text-sm font-headline font-bold text-on-surface leading-snug mt-1">${escapeHtml(q.question)}</h4>
@@ -660,7 +660,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            <span>${gameState.aiModeEnabled ? 'AI Generating...' : 'Initializing...'}</span>
+            <span>${gameState.aiModeEnabled ? 'Loading...' : 'Initializing...'}</span>
           </div>
         `;
       }
@@ -738,10 +738,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const label = optionLabels[index] || 'A';
       
       const optBtn = document.createElement('button');
-      optBtn.className = 'glass-card p-6 flex flex-col items-start gap-3 hover:bg-white/10 active:scale-[0.98] transition-all text-left relative overflow-hidden w-full';
+      optBtn.className = 'glass-card p-6 flex flex-col items-start gap-3 hover:bg-[#2A2A2D] active:scale-[0.98] transition-all text-left relative overflow-hidden w-full';
       optBtn.style.animationDelay = `${index * 0.08}s`;
       optBtn.innerHTML = `
-        <div class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-xs font-extrabold text-on-surface-variant font-headline label-marker flex-shrink-0">${label}</div>
+        <div class="w-8 h-8 rounded-full border border-[#333336] flex items-center justify-center text-xs font-extrabold text-on-surface-variant font-headline label-marker flex-shrink-0">${label}</div>
         <span class="text-sm font-semibold text-on-surface select-opt-text"></span>
         <div class="check-icon absolute top-4 right-4 text-secondary hidden">
           <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
@@ -749,7 +749,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="wrong-icon absolute top-4 right-4 text-accent-magenta hidden">
           <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">cancel</span>
         </div>
-        <div class="active-bottom-bar absolute bottom-0 left-0 h-1 bg-secondary w-full shadow-[0_-4px_12px_rgba(76,215,246,0.4)] hidden"></div>
+        <div class="active-bottom-bar absolute bottom-0 left-0 h-1 bg-secondary w-full shadow-md hidden"></div>
       `;
       
       optBtn.querySelector('.select-opt-text').textContent = optText;
@@ -778,7 +778,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const allOptionBtns = optionsGrid.querySelectorAll('button');
     
     if (isCorrect) {
-      selectedBtn.classList.remove('hover:bg-white/10');
+      selectedBtn.classList.remove('hover:bg-[#2A2A2D]');
       selectedBtn.classList.add('correct-glow');
       
       // Reveal positive indicators
@@ -793,7 +793,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       const labelMarker = selectedBtn.querySelector('.label-marker');
       if (labelMarker) {
-        labelMarker.classList.remove('border-white/10', 'text-on-surface-variant');
+        labelMarker.classList.remove('border-[#333336]', 'text-on-surface-variant');
         labelMarker.classList.add('border-secondary', 'bg-secondary/20', 'text-secondary');
       }
       
@@ -813,7 +813,7 @@ document.addEventListener('DOMContentLoaded', () => {
       Sound.playCorrect();
       
     } else {
-      selectedBtn.classList.remove('hover:bg-white/10');
+      selectedBtn.classList.remove('hover:bg-[#2A2A2D]');
       selectedBtn.classList.add('wrong-glow');
       
       // Reveal negative indicators
@@ -829,7 +829,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       const labelMarker = selectedBtn.querySelector('.label-marker');
       if (labelMarker) {
-        labelMarker.classList.remove('border-white/10', 'text-on-surface-variant');
+        labelMarker.classList.remove('border-[#333336]', 'text-on-surface-variant');
         labelMarker.classList.add('border-accent-magenta', 'bg-accent-magenta/20', 'text-accent-magenta');
       }
       
@@ -837,7 +837,7 @@ document.addEventListener('DOMContentLoaded', () => {
       allOptionBtns.forEach(btn => {
         const textSpan = btn.querySelector('.select-opt-text');
         if (textSpan.textContent === currentQ.correctAnswer) {
-          btn.classList.remove('hover:bg-white/10');
+          btn.classList.remove('hover:bg-[#2A2A2D]');
           btn.classList.add('correct-glow');
           
           const correctCheck = btn.querySelector('.check-icon');
@@ -851,7 +851,7 @@ document.addEventListener('DOMContentLoaded', () => {
           
           const correctLabel = btn.querySelector('.label-marker');
           if (correctLabel) {
-            correctLabel.classList.remove('border-white/10', 'text-on-surface-variant');
+            correctLabel.classList.remove('border-[#333336]', 'text-on-surface-variant');
             correctLabel.classList.add('border-secondary', 'bg-secondary/20', 'text-secondary');
           }
         }
@@ -879,7 +879,7 @@ document.addEventListener('DOMContentLoaded', () => {
       allOptionBtns.forEach(btn => {
         const textSpan = btn.querySelector('.select-opt-text');
         if (textSpan && textSpan.textContent === currentQ.correctAnswer) {
-          btn.classList.remove('hover:bg-white/10');
+          btn.classList.remove('hover:bg-[#2A2A2D]');
           btn.classList.add('correct-glow');
           
           const correctCheck = btn.querySelector('.check-icon');
@@ -893,7 +893,7 @@ document.addEventListener('DOMContentLoaded', () => {
           
           const correctLabel = btn.querySelector('.label-marker');
           if (correctLabel) {
-            correctLabel.classList.remove('border-white/10', 'text-on-surface-variant');
+            correctLabel.classList.remove('border-[#333336]', 'text-on-surface-variant');
             correctLabel.classList.add('border-secondary', 'bg-secondary/20', 'text-secondary');
           }
         }
@@ -978,7 +978,7 @@ document.addEventListener('DOMContentLoaded', () => {
     allOptionBtns.forEach(btn => {
       const textSpan = btn.querySelector('.select-opt-text');
       if (textSpan.textContent === currentQ.correctAnswer) {
-        btn.classList.remove('hover:bg-white/10');
+        btn.classList.remove('hover:bg-[#2A2A2D]');
         btn.classList.add('correct-glow');
         
         const correctCheck = btn.querySelector('.check-icon');
@@ -992,7 +992,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const correctLabel = btn.querySelector('.label-marker');
         if (correctLabel) {
-          correctLabel.classList.remove('border-white/10', 'text-on-surface-variant');
+          correctLabel.classList.remove('border-[#333336]', 'text-on-surface-variant');
           correctLabel.classList.add('border-secondary', 'bg-secondary/20', 'text-secondary');
         }
       }
@@ -1083,8 +1083,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const rank = idx + 1;
       
       // Determine rank badge class
-      let rankPill = `<span class="inline-block text-xs font-bold px-2.5 py-0.5 rounded-full bg-white/5 text-on-surface-variant border border-white/5">${rank}</span>`;
-      if (rank === 1) rankPill = `<span class="inline-block text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 shadow-[0_0_8px_rgba(245,158,11,0.2)]">🥇 1</span>`;
+      let rankPill = `<span class="inline-block text-xs font-bold px-2.5 py-0.5 rounded-full bg-[#1A1A1D] text-on-surface-variant border border-[#333336]">${rank}</span>`;
+      if (rank === 1) rankPill = `<span class="inline-block text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 shadow-md">🥇 1</span>`;
       if (rank === 2) rankPill = `<span class="inline-block text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-300/20 text-slate-300 border border-slate-300/30">🥈 2</span>`;
       if (rank === 3) rankPill = `<span class="inline-block text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-700/20 text-amber-600 border border-amber-700/30">🥉 3</span>`;
 
@@ -1101,7 +1101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <td class="py-4 px-5 text-on-surface-variant">${escapeHtml(entry.category)}</td>
         <td class="py-4 px-5 text-on-surface-variant"><span class="${getDifficultyBadgeClass(entry.difficulty)} px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider">${entry.difficulty}</span></td>
         <td class="py-4 px-5 text-on-surface-variant">${entry.accuracy}%</td>
-        <td class="py-4 px-5 text-right font-headline font-bold text-secondary glow-cyan">${entry.score} XP</td>
+        <td class="py-4 px-5 text-right font-headline font-bold text-secondary ">${entry.score} XP</td>
       `;
 
       tr.querySelector('strong').textContent = entry.username;
@@ -1149,7 +1149,7 @@ document.addEventListener('DOMContentLoaded', () => {
       item.className = 'flex items-center gap-3 py-1';
       item.innerHTML = `
         <div class="w-7 h-7 rounded-full ${rankColor} flex items-center justify-center font-bold text-xs flex-shrink-0">${rank}</div>
-        <div class="w-8 h-8 rounded-full overflow-hidden bg-white/5 border border-white/10 flex-shrink-0">
+        <div class="w-8 h-8 rounded-full overflow-hidden bg-[#1A1A1D] border border-[#333336] flex-shrink-0">
           <img class="w-full h-full object-cover bg-surface-container" src="${avatarUrl}" alt="User Avatar">
         </div>
         <div class="flex-grow min-w-0">
@@ -1194,7 +1194,7 @@ document.addEventListener('DOMContentLoaded', () => {
       item.className = 'flex items-center gap-3 py-1';
       item.innerHTML = `
         <div class="w-7 h-7 rounded-full ${rankColor} flex items-center justify-center font-bold text-xs flex-shrink-0">${rank}</div>
-        <div class="w-8 h-8 rounded-full overflow-hidden bg-white/5 border border-white/10 flex-shrink-0">
+        <div class="w-8 h-8 rounded-full overflow-hidden bg-[#1A1A1D] border border-[#333336] flex-shrink-0">
           <img class="w-full h-full object-cover bg-surface-container" src="${avatarUrl}" alt="User Avatar">
         </div>
         <div class="flex-grow min-w-0">
@@ -1243,11 +1243,11 @@ document.addEventListener('DOMContentLoaded', () => {
       Sound.initContext();
       
       const accuracyText = resultsAccuracyVal ? resultsAccuracyVal.textContent : '0%';
-      const shareText = `⚡ I just completed the QuizSpark challenge! Score: ${gameState.score} XP with ${accuracyText} Accuracy on ${gameState.selectedCategory} (${gameState.selectedDifficulty}). Can you beat me? 🚀`;
+      const shareText = `⚡ I just completed the TechQuiz challenge! Score: ${gameState.score} XP with ${accuracyText} Accuracy on ${gameState.selectedCategory} (${gameState.selectedDifficulty}). Can you beat me? 🚀`;
       
       if (navigator.share) {
         navigator.share({
-          title: 'QuizSpark Score',
+          title: 'TechQuiz Score',
           text: shareText,
           url: window.location.href
         }).catch(err => console.log('Share canceled'));

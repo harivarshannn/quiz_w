@@ -219,5 +219,5 @@ app.get('*', (req, res) => {
 
 // Start Server
 app.listen(PORT, () => {
-  console.log(`🚀 QuizSpark server running at http://localhost:${PORT}`);
+  console.log(`🚀 TechQuiz server running at http://localhost:${PORT}`);
 });

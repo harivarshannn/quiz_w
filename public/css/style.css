@@ -1,151 +1,103 @@
 /* ==========================================================
-   QuizSpark Premium Dashboard Overrides Sheet
-   Integrates Luminous Glass primitives, Conic Timers,
-   Correct/Wrong Option Glow States, and custom scrollbars.
+   Quiz Application Core Stylesheet
+   Clean, Flat, Minimal, and Highly Performant
    ========================================================== */
 
-/* Design Tokens & Animations */
 :root {
   --bg-color: #0A0A0C;
-  --panel-bg: rgba(255, 255, 255, 0.05);
-  --panel-border: rgba(255, 255, 255, 0.08);
-  --panel-border-hover: rgba(255, 255, 255, 0.18);
+  --surface-color: #1A1A1D;
+  --surface-hover: #2A2A2D;
+  --border-color: #333336;
+  --border-hover: #55555A;
   
-  --primary-violet: #d0bcff;
-  --secondary-cyan: #4cd7f6;
-  --accent-magenta: #ffafd3;
-  --accent-yellow: #f59e0b;
+  --primary: #6366f1;
+  --secondary: #14b8a6;
+  --accent-danger: #ef4444;
+  --accent-warning: #f59e0b;
   
-  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --glass-blur: blur(30px);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  
+  --transition-fast: all 0.15s ease;
 }
 
-/* Global Adjustments */
 body {
   background-color: var(--bg-color);
+  color: var(--text-main);
   overflow-x: hidden;
 }
 
-/* Premium Scrollbars */
+/* Scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
   background: var(--bg-color);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 99px;
+  background: var(--border-color);
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--border-hover);
 }
 
-/* Premium Neo-Glass Primitive Card Layouts */
-.neo-glass, .glass-card {
-  background: var(--panel-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--panel-border);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
-  transition: var(--transition-smooth);
+/* Flat Panel Primitive */
+.neo-glass, .glass-card, .flat-panel {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: var(--transition-fast);
 }
 
-.neo-glass:hover, .glass-card:hover {
-  border-color: var(--panel-border-hover);
-  background: rgba(255, 255, 255, 0.08);
+.neo-glass:hover, .glass-card:hover, .flat-panel:hover {
+  border-color: var(--border-hover);
 }
 
-.glass-card-border {
-  border-color: rgba(255, 255, 255, 0.12);
-}
-
-/* Glowing Neon Custom Drop Shadows */
-.glow-violet {
-  filter: drop-shadow(0 0 16px rgba(208, 188, 255, 0.35));
-}
-
-.glow-cyan {
-  filter: drop-shadow(0 0 16px rgba(76, 215, 246, 0.35));
-}
-
-.text-gradient {
-  background: linear-gradient(135deg, var(--primary-violet) 0%, var(--secondary-cyan) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Atmospheric Ambient Background Lights */
-.radial-blob, .ambient-blob {
-  position: fixed;
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  filter: blur(60px);
-  z-index: -1;
-  opacity: 0.15;
-  pointer-events: none;
-  transform: translateZ(0);
-  will-change: transform;
-}
-
-@keyframes float-ambient {
-  0% { transform: translate(0, 0) scale(1) translateZ(0); }
-  100% { transform: translate(6%, 8%) scale(1.1) translateZ(0); }
-}
-
-/* Custom Interactive Option Button States */
+/* Option Buttons */
 .selected-glow {
-  box-shadow: 0 0 24px 0px rgba(208, 188, 255, 0.3);
-  background: rgba(208, 188, 255, 0.15) !important;
-  border: 1px solid rgba(208, 188, 255, 0.5) !important;
+  background-color: rgba(99, 102, 241, 0.1) !important;
+  border-color: var(--primary) !important;
 }
 
 .correct-glow {
-  box-shadow: 0 0 24px 0px rgba(76, 215, 246, 0.4);
-  background: rgba(76, 215, 246, 0.15) !important;
-  border: 1px solid rgba(76, 215, 246, 0.6) !important;
-  animation: pulse-correct 1.5s infinite alternate ease-in-out;
+  background-color: rgba(20, 184, 166, 0.1) !important;
+  border-color: var(--secondary) !important;
 }
 
 .wrong-glow {
-  box-shadow: 0 0 20px 0px rgba(255, 175, 211, 0.3);
-  background: rgba(255, 175, 211, 0.1) !important;
-  border: 1px solid rgba(255, 175, 211, 0.4) !important;
+  background-color: rgba(239, 68, 68, 0.1) !important;
+  border-color: var(--accent-danger) !important;
 }
 
-@keyframes pulse-correct {
-  0% { box-shadow: 0 0 16px rgba(76, 215, 246, 0.3); }
-  100% { box-shadow: 0 0 28px rgba(76, 215, 246, 0.5); }
-}
-
-/* Radial Timer Rings (Conic Gradients) */
+/* Timer Gradient */
 .timer-gradient {
-  background: conic-gradient(var(--primary-violet) 360deg, rgba(255,255,255,0.06) 0deg);
+  background: conic-gradient(var(--primary) 360deg, var(--surface-color) 0deg);
   transition: background 0.1s linear;
 }
 
 .timer-gradient.warning {
-  background: conic-gradient(var(--accent-yellow) 360deg, rgba(255,255,255,0.06) 0deg);
+  background: conic-gradient(var(--accent-warning) 360deg, var(--surface-color) 0deg);
 }
 
 .timer-gradient.danger {
-  background: conic-gradient(var(--accent-magenta) 360deg, rgba(255,255,255,0.06) 0deg);
+  background: conic-gradient(var(--accent-danger) 360deg, var(--surface-color) 0deg);
 }
 
-/* Linear progress tracks overlays */
-.progress-glow {
-  box-shadow: 0 0 10px rgba(76, 215, 246, 0.7);
+/* Progress Fill */
+#progress-fill {
+  background-color: var(--primary);
+  transition: width 0.3s ease;
 }
 
-/* Material Symbols fill alignment settings */
+/* Material Symbols */
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   vertical-align: middle;
 }
 
-/* Dynamic slide in layouts */
+/* SPA Tabs */
 .tab-section {
   display: none !important;
   opacity: 0;
@@ -153,36 +105,23 @@ body {
 
 .tab-section.active {
   display: flex !important;
-  animation: tabSlideIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  opacity: 1;
 }
 
-@keyframes tabSlideIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Tables visual customization */
+/* Leaderboard */
 table.leaderboard-table th {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--border-color);
 }
-
 table.leaderboard-table tr.user-row {
-  background: rgba(208, 188, 255, 0.08);
-  border: 1px dashed var(--primary-violet);
+  background-color: var(--surface-hover);
+  border-left: 4px solid var(--primary);
 }
 
-/* Mobile responsive navigation transitions overrides */
+/* Mobile Sidebar */
 @media (max-width: 1024px) {
-  /* Let mobile overlay or navigation flow naturally */
   aside {
     transform: translateX(-100%);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.2s ease;
   }
   aside.mobile-open {
     transform: translateX(0);
@@ -200,7 +139,7 @@ table.leaderboard-table tr.user-row {
   }
 }
 
-/* Logged Out View Layout Overrides */
+/* Logged Out */
 body.logged-out #app-sidebar,
 body.logged-out header {
   display: none !important;
@@ -216,12 +155,12 @@ body.logged-out main {
   justify-content: center !important;
 }
 
-/* Premium Floating Input Labels */
+/* Floating Input */
 .relative input:focus ~ label,
 .relative input:not(:placeholder-shown) ~ label {
   transform: translateY(-140%) scale(0.85);
   left: 12px;
-  color: var(--primary-violet);
+  color: var(--primary);
   background: var(--bg-color);
   padding: 0 6px;
 }
