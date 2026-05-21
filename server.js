@@ -252,6 +252,23 @@ app.post('/api/leaderboard', async (req, res) => {
   }
 });
 
+// Route: Get AI Explanation for wrong answer
+app.post('/api/explain', async (req, res) => {
+  try {
+    const { question, wrongAnswer, correctAnswer, topic } = req.body;
+    
+    if (!question || !correctAnswer) {
+      return res.status(400).json({ error: 'Missing required explanation context.' });
+    }
+
+    const explanation = await generateAIExplanation(question, wrongAnswer, correctAnswer, topic);
+    res.json({ explanation });
+  } catch (error) {
+    console.error('[Server] Explanation Route Error:', error);
+    res.status(500).json({ error: 'Failed to generate explanation.' });
+  }
+});
+
 // Serve frontend fallback for SPA router
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
