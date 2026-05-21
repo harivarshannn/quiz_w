@@ -884,11 +884,10 @@ function syncUsername(name) {
     const isCorrect = (optionText === currentQ.correctAnswer);
     const allOptionBtns = optionsGrid.querySelectorAll('button');
     
-    if (isCorrect) {
+        if (isCorrect) {
       selectedBtn.classList.remove('hover:bg-[#2A2A2D]');
       selectedBtn.classList.add('correct-glow');
       
-      // Reveal positive indicators
       const checkIcon = selectedBtn.querySelector('.check-icon');
       if (checkIcon) checkIcon.classList.remove('hidden');
       
@@ -904,26 +903,14 @@ function syncUsername(name) {
         labelMarker.classList.add('border-secondary', 'bg-secondary/20', 'text-secondary');
       }
       
+      gameState.score += 100 + (gameState.timerSeconds * 2);
       gameState.correctAnswersCount++;
-      
-      // Calculate dynamic score points: (Base 100 + Seconds Left * 10) * Difficulty multiplier
-      let difficultyMultiplier = 1;
-      if (gameState.selectedDifficulty === 'Medium') difficultyMultiplier = 1.5;
-      if (gameState.selectedDifficulty === 'Hard') difficultyMultiplier = 2;
-      
-      const timeBonus = gameState.timerSeconds * 10;
-      const pointsEarned = Math.round((100 + timeBonus) * difficultyMultiplier);
-      
-      gameState.score += pointsEarned;
       headerScoreVal.textContent = gameState.score;
-      
       Sound.playCorrect();
-      
     } else {
       selectedBtn.classList.remove('hover:bg-[#2A2A2D]');
       selectedBtn.classList.add('wrong-glow');
       
-      // Reveal negative indicators
       const wrongIcon = selectedBtn.querySelector('.wrong-icon');
       if (wrongIcon) wrongIcon.classList.remove('hidden');
       
@@ -931,7 +918,6 @@ function syncUsername(name) {
       if (bottomBar) {
         bottomBar.classList.remove('hidden');
         bottomBar.classList.add('bg-accent-magenta');
-        bottomBar.style.boxShadow = '0 -4px 12px rgba(255,175,211,0.4)';
       }
       
       const labelMarker = selectedBtn.querySelector('.label-marker');
@@ -939,79 +925,24 @@ function syncUsername(name) {
         labelMarker.classList.remove('border-[#333336]', 'text-on-surface-variant');
         labelMarker.classList.add('border-accent-magenta', 'bg-accent-magenta/20', 'text-accent-magenta');
       }
-      
-      // Highlight correct answer card option as a guide
-      allOptionBtns.forEach(btn => {
-        const textSpan = btn.querySelector('.select-opt-text');
-        if (textSpan.textContent === currentQ.correctAnswer) {
-          btn.classList.remove('hover:bg-[#2A2A2D]');
-          btn.classList.add('correct-glow');
-          
-          const correctCheck = btn.querySelector('.check-icon');
-          if (correctCheck) correctCheck.classList.remove('hidden');
-          
-          const correctBar = btn.querySelector('.active-bottom-bar');
-          if (correctBar) {
-            correctBar.classList.remove('hidden');
-            correctBar.classList.add('bg-secondary');
-          }
-          
-          const correctLabel = btn.querySelector('.label-marker');
-          if (correctLabel) {
-            correctLabel.classList.remove('border-[#333336]', 'text-on-surface-variant');
-            correctLabel.classList.add('border-secondary', 'bg-secondary/20', 'text-secondary');
-          }
-        }
-      });
-      
-      Sound.playWrong();
-    }
 
-    skipBtn.style.display = 'none';
-    nextBtn.style.display = 'block';
-    nextBtn.disabled = false;
-  }
-
-  // Skip Question click action
-  if (skipBtn) {
-    skipBtn.addEventListener('click', () => {
-      Sound.playWrong();
-      
-      gameState.hasAnsweredActiveQuestion = true;
-      clearInterval(gameState.timerInterval);
-      
-      const currentQ = gameState.questionsList[gameState.currentQuestionIndex];
-      const allOptionBtns = optionsGrid ? optionsGrid.querySelectorAll('button') : [];
-      
       allOptionBtns.forEach(btn => {
         const textSpan = btn.querySelector('.select-opt-text');
         if (textSpan && textSpan.textContent === currentQ.correctAnswer) {
-          btn.classList.remove('hover:bg-[#2A2A2D]');
-          btn.classList.add('correct-glow');
-          
-          const correctCheck = btn.querySelector('.check-icon');
-          if (correctCheck) correctCheck.classList.remove('hidden');
-          
-          const correctBar = btn.querySelector('.active-bottom-bar');
-          if (correctBar) {
-            correctBar.classList.remove('hidden');
-            correctBar.classList.add('bg-secondary');
-          }
-          
-          const correctLabel = btn.querySelector('.label-marker');
-          if (correctLabel) {
-            correctLabel.classList.remove('border-[#333336]', 'text-on-surface-variant');
-            correctLabel.classList.add('border-secondary', 'bg-secondary/20', 'text-secondary');
-          }
+          btn.classList.add('correct-outline');
+          const checkIcon = btn.querySelector('.check-icon');
+          if (checkIcon) checkIcon.classList.remove('hidden');
         }
       });
-  
-      skipBtn.style.display = 'none';
-      if (nextBtn) {
-        nextBtn.style.display = 'block';
-        nextBtn.disabled = false;
-      }
-    });
+      Sound.playWrong();
+    }
+
+    if (skipBtn) skipBtn.style.display = 'none';
+    if (nextBtn) {
+      nextBtn.style.display = 'flex';
+      nextBtn.disabled = false;
+    }
+);
   }
 
   // Next Question trigger

@@ -63,8 +63,9 @@ async function generateAIQuestions(difficulty, category) {
   const topic = category && category !== 'All' ? category : 'General Tech & Coding';
 
   const systemPrompt = `You are a professional coding quiz generator. 
-Generate exactly 6 unique, highly varied multiple-choice questions specifically about '${topic}' with difficulty level '${difficulty}'.
-Ensure the questions are not generic. Use randomization in your generation to guarantee different topics within '${topic}' are covered each time.
+Generate exactly 6 unique, highly technical multiple-choice questions specifically and ONLY about '${topic}' at a '${difficulty}' level.
+Ensure the questions cover deep aspects of ${topic} and are not generic. Use randomization in your generation to guarantee different sub-topics within '${topic}' are covered each time.
+NEVER repeat the same question. Use different phrasing and focus areas.
 Return ONLY a valid JSON array of objects. Do not include any markdown formatting, backticks, or extra text.
 
 Each object must follow this EXACT schema:
@@ -77,10 +78,11 @@ Each object must follow this EXACT schema:
 }`;
 
   try {
+    const seed = Math.floor(Math.random() * 1000000);
     const chatCompletion = await groq.chat.completions.create({
       messages: [
         { role: 'system', content: systemPrompt },
-        { role: 'user', content: `Generate 6 ${difficulty} ${topic} questions. Make them completely unique and different from typical common examples. Use seed: ${Math.random()}` }
+        { role: 'user', content: `Generate 6 ${difficulty} ${topic} questions. Use randomization seed: ${seed}. Ensure they are technical and specific to ${topic}.` }
       ],
       model: 'llama-3.3-70b-versatile',
       temperature: 0.9,
@@ -91,10 +93,8 @@ Each object must follow this EXACT schema:
     const content = chatCompletion.choices[0]?.message?.content;
     const parsed = JSON.parse(content);
     
-    // Groq sometimes wraps the array in an object like { "questions": [...] }
     const questions = Array.isArray(parsed) ? parsed : (parsed.questions || []);
     
-    // Assign new IDs based on current DB count
     const db = await readDB();
     let nextId = db.questions.length > 0 ? Math.max(...db.questions.map(q => q.id)) + 1 : 1;
     
